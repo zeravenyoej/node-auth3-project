@@ -1,5 +1,5 @@
 Using JSON Web tokens:
-pull request: 
+pull request: https://github.com/zeravenyoej/node-auth3-project/pull/1
 
 # Authentication using JSON Web Tokens (JWTs)
 
