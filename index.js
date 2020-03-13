@@ -10,7 +10,7 @@ server.use(express.json())
 server.use('/auth/', authRoutes)
 
 server.use('/', (err, req, res, next) => {
-    console.log()
+    console.log("ERROR: ", err)
     res.status(500).json("Something went wrong")
 })
 

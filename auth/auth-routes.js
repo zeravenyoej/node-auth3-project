@@ -1,9 +1,11 @@
 const router = require("express").Router()
 const User = require('../users/users-model')
+const validateUser = require('../middleware/validateUser')
+const restrict = require('../middleware/restrict')
 
 
 //all routes follow /auth/
-router.get('/register', (req, res, next) => {
+router.post('/register', (req, res, next) => {
     try {
 
     } catch(err){
@@ -12,7 +14,7 @@ router.get('/register', (req, res, next) => {
 })
 
 
-router.get('/login', (req, res, next) => {
+router.post('/login', validateUser(), (req, res, next) => {
     try {
 
     } catch(err){
@@ -21,7 +23,7 @@ router.get('/login', (req, res, next) => {
 })
 
 
-router.get('/logout', (req, res, next) => {
+router.get('/logout', restrict(), (req, res, next) => {
     try {
 
     } catch(err){
