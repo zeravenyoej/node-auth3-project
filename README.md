@@ -1,3 +1,6 @@
+Using JSON Web tokens:
+pull request: 
+
 # Authentication using JSON Web Tokens (JWTs)
 
 ## Topics
