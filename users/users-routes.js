@@ -1,9 +1,13 @@
+const router = require("express").Router()
 const restrict = require('../middleware/restrict')
 
-router.get('/logout', (req, res, next) => {
+// after '/users'
+router.get('/', async (req, res, next) => {
     try {
 
     } catch(err){
         next(err)
     }
 })
+
+module.exports = router
