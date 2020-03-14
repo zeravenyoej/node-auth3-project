@@ -8,15 +8,15 @@ const bcrypt = require("bcryptjs")
 //all routes follow /auth/
 router.post('/register', async (req, res, next) => {
     try {
-        const { username, password } = req.body
+        const { username, password, department } = req.body
 
         const user = await User.findByFilter({ username }).first()
         if(user){
             return res.status(400).json({message: "Username already taken"})
         }
 
-        if (!password){
-            return res.status(400).json({message: "Please provide a password"})
+        if (!password || !department){
+            return res.status(400).json({message: "Please provide a password and department"})
         }
 
         const newUser = await User.createUser(req.body)
@@ -46,7 +46,13 @@ router.post('/login', validateUser(), async (req, res, next) => {
 
 router.get('/logout', restrict(), async (req, res, next) => {
     try {
-
+        req.session.destroy((err) => {
+            if(err){
+                next(err)
+            } else {
+                res.json({message: "Successfully logged out"})
+            }
+        })
     } catch(err){
         next(err)
     }

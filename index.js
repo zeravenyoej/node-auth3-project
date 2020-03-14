@@ -14,12 +14,12 @@ server.use(helmet())
 server.use(express.json())
 server.use(session({
     name: "token",
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET || "secret",
     cookie: {
         httpOnly: true,
     },
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET || "secret",
     store: new KnexSessionStore({
         createTable: true,
         knex: dbConfig

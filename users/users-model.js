@@ -9,18 +9,18 @@ module.exports = {
 }
 
 function findAll(){
-    return db("users").select("id", "username")
+    return db("users").select("id", "username", "department")
 }
 
 function findByFilter(filter){
     return db("users")
-        .select("id", "username", "password")
+        // .select("id", "username", "password", "department")
         .where(filter)
 }
 
 function findById(id){
     return db("users")
-        .select("id", "username")
+        .select("id", "username", "department")
         .where({ id })
         .first()
 }

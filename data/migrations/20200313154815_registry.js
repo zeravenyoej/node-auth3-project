@@ -8,6 +8,8 @@ exports.up = async function(knex) {
                 .unique()
             table.text("password")
                 .notNullable()
+            table.text("department")
+                .notNullable()
         })
 };
 
