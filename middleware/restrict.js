@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken")
 
 module.exports = function restrict(){
     return async (req, res, next) => {
-        console.log(req.cookies)
         const { authToken } = req.cookies
         if (!authToken){
             return res.status(400).json({message: "No credentials provided"})

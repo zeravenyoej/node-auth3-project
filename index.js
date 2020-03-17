@@ -11,7 +11,6 @@ const PORT = 5000
 
 server.use(helmet())
 server.use(express.json())
-//middleware that helps us get values from cookies sent by the client
 server.use(cookieParser())
 
 server.use('/auth', authRoutes)

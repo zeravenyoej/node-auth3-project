@@ -14,7 +14,6 @@ function findAll(){
 
 function findByFilter(filter){
     return db("users")
-        // .select("id", "username", "password", "department")
         .where(filter)
 }
 

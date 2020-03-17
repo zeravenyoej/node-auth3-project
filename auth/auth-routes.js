@@ -1,12 +1,10 @@
 const router = require("express").Router()
 const User = require('../users/users-model')
 const validateUser = require('../middleware/validateUser')
-const restrict = require('../middleware/restrict')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 
-//Do I not need this in the register route? Jason doesn't have it on the most recent guided lecture
 function generateToken(user){
     const payload = {
         username: user.username,

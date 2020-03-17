@@ -4,7 +4,6 @@ module.exports = function validateUser(){
 
     return async (req, res, next) => {
         try {
-            //check if the user is in the database
             const { username } = req.body
             const user = await User.findByFilter({ username }).first()
             if(!user){
