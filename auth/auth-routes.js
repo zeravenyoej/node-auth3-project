@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 
+//Do I not need this in the register route? Jason doesn't have it on the most recent guided lecture
 function generateToken(user){
     const payload = {
         username: user.username,
@@ -17,12 +18,6 @@ function generateToken(user){
         expiresIn: '1hr'
     }
     return jwt.sign(payload, secret, options)
-
-    // return jwt.sign({
-    //     userID: user.id,
-    // }, process.env.JWT_SECRET, {
-    //     expiresIn: '1hr',
-    // })
 };
 
 //all routes follow /auth/
@@ -54,36 +49,18 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', validateUser(), async (req, res, next) => {
     try {
         const { username, password } = req.body
-        //now that we've established that the username is real, check the password
         const isPasswordValid = bcrypt.compare(password, req.user.password)
 
         if(!isPasswordValid){
             res.status(400).json({ message: "Please enter a valid password" })
         } else {
-            //req.session.user = req.user
             const token = generateToken(req.user)
-            res.json({
-                message: `Welcome ${username}`, 
-                authToken: token
-            })
+            res.cookie("authToken", token)
+            res.json({ message: `Welcome ${username}` })
         }
     } catch(err){
         next(err)
     }
 })
 
-
-// router.get('/logout', restrict(), async (req, res, next) => {
-//     try {
-//         req.session.destroy((err) => {
-//             if(err){
-//                 next(err)
-//             } else {
-//                 res.json({message: "Successfully logged out"})
-//             }
-//         })
-//     } catch(err){
-//         next(err)
-//     }
-// })
 module.exports = router
